@@ -30,6 +30,11 @@ public class ReferenceDataService {
     }
 
     public boolean validateTicker(String ticker) {
+        if (ticker == null || ticker.trim().isEmpty()) {
+            log.warn("Invalid ticker provided: " + ticker);
+            return false;
+        }
+    
         String url = this.referenceDataServiceAddress + "//stocks/" + ticker;
         ResponseEntity<Security> response = null;
 
