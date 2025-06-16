@@ -19,6 +19,7 @@ import finos.traderx.tradeservice.exceptions.ResourceNotFoundException;
 import finos.traderx.tradeservice.model.Account;
 import finos.traderx.tradeservice.model.Security;
 import finos.traderx.tradeservice.model.TradeOrder;
+import finos.traderx.tradeservice.service.ReferenceDataService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 
@@ -32,10 +33,10 @@ public class TradeOrderController {
 	@Autowired
 	private Publisher<TradeOrder> tradePublisher;
 	
+	@Autowired
+	private ReferenceDataService referenceDataService;
+	
 	private RestTemplate restTemplate = new RestTemplate();
-
-	@Value("${reference.data.service.url}")
-	private String referenceDataServiceAddress;
 
 	@Value("${account.service.url}")
 	private String accountServiceAddress;
@@ -45,7 +46,7 @@ public class TradeOrderController {
 	public ResponseEntity<TradeOrder> createTradeOrder(@Parameter(description = "the intendeded trade order") @RequestBody TradeOrder tradeOrder) {
 		log.info("Called createTradeOrder");
 		
-		if (!validateTicker(tradeOrder.getSecurity())) 
+		if (!referenceDataService.validateTicker(tradeOrder.getSecurity())) 
 		{
 			throw new ResourceNotFoundException(tradeOrder.getSecurity() + " not found in Reference data service.");
 		}
