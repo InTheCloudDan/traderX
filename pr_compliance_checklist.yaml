@@ -81,23 +81,6 @@ pr_compliances:
       - No documentation of error responses
       - Breaking changes without version updates
 
-  - title: "Security & Data Protection"
-    compliance_label: true
-    objective: "Implement security best practices and protect sensitive data"
-    success_criteria: |
-      - No hardcoded credentials or secrets
-      - PII/sensitive data masked in logs (e.g., account numbers)
-      - Input sanitization for user-provided data
-      - Proper authentication/authorization checks
-      - SQL injection prevention (parameterized queries)
-      - No sensitive data in URLs or query parameters
-    failure_criteria: |
-      - Passwords, API keys, or tokens in code
-      - Logging full request/response bodies with sensitive data
-      - String concatenation for SQL queries
-      - Missing authorization checks on protected resources
-      - Sensitive data exposed in exception messages
-
   - title: "Domain Model Integrity"
     compliance_label: true
     objective: "Maintain clean domain models following DDD principles"
