@@ -7,23 +7,23 @@ import org.springframework.stereotype.Component;
  * Quick trade domain model
  * This model intentionally violates domain model integrity rules for testing
  */
-@Component // Violation: Domain object should not be a Spring component
+@Component 
 public class QuickTrade {
     
-    // Violation: Public fields
+    
     public String id;
     public String accountId;
     public double amount;
     
-    // Violation: Anemic domain model - no business logic
+    
     private String symbol;
     private String status;
     
-    // Violation: Domain object depending on infrastructure
+    
     @Autowired
     private Object repository;
     
-    // Violation: Public setters on all fields without justification
+    
     public String getId() {
         return id;
     }
@@ -64,13 +64,13 @@ public class QuickTrade {
         this.status = status;
     }
     
-    // Violation: Using String for everything (primitive obsession)
+    
     private String tradeDate;
     private String tradeTime;
     private String tradePrice;
     private String tradeQuantity;
     
-    // Violation: No validation or business rules
+    
     public void execute() {
         // Empty implementation
     }
